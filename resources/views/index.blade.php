@@ -11,7 +11,7 @@
         <div class="container-fluid">
           <span class="navbar-brand mb-0 h1">Blogs</span>
         </div>
-      </nav>
+    </nav>
       <div class="d-flex justify-content-center p-3">
         <button class="btn btn-success " type="button">Create Post</button>
       </div>
@@ -33,7 +33,7 @@
         <td>{{$post['Posted_By']}}</td>
         <td>{{$post['Created_At']}}</td>
         <td>
-          <a href="#" class="btn btn-info">View</a>
+          <a href="/posts/{{$post['id']}}" class="btn btn-info">View</a>
           <a href="#" class="btn btn-primary">Edit</a>
           <a href="#" class="btn btn-danger">Delete</a>
         </td>
