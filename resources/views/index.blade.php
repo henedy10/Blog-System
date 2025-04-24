@@ -1,5 +1,7 @@
 @extends('layouts.app')
+
 @section('title') Home @endsection
+
 @section('content')
       <div class="d-flex justify-content-center p-3">
         <button class="btn btn-success " type="button">Create Post</button>

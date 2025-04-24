@@ -1,5 +1,7 @@
 @extends('layouts.app')
+
 @section('title') blog @endsection
+
 @section('content')
     @foreach ($singlepost as $post)
     @if ($post['id']==$PostId)
