@@ -11,10 +11,10 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">
-                Blogs 
-                <a href="/posts">all posts</a>
+                Blogs
+                <a href="{{route('posts.index')}}">all posts</a>
             </span>
-            
+
         </div>
     </nav>
 
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-        
+
     @endif
     @endforeach
 
