@@ -27,5 +27,12 @@ class PostController extends Controller
     public function create() {
         return view('posts.create');
     }
+
+    public function store() {
+        $title=request()->title;
+        $description= request()->description;
+        $created_post=request()->post_creator;
+        return to_route('posts.index');
+    }
 }
 
