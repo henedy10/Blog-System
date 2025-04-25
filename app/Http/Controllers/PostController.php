@@ -12,7 +12,7 @@ class PostController extends Controller
             ['id'=>2,'Title'=>'Java','Posted_By'=>'Ahmed','Created_At'=>'2022-10-11'],
             ['id'=>3,'Title'=>'Html','Posted_By'=>'Mhmd','Created_At'=>'2022-10-12']
         ];
-        return view('index',['allposts'=>$allposts]);
+        return view('posts.index',['allposts'=>$allposts]);
     }
 
     public function show($PostId){
@@ -21,11 +21,11 @@ class PostController extends Controller
             ['id'=>2,'Title'=>'Java','Posted_By'=>'Ahmed','Created_At'=>'2022-10-11'],
             ['id'=>3,'Title'=>'Html','Posted_By'=>'Mhmd','Created_At'=>'2022-10-12']
         ];
-        return view('show',['singlepost'=>$singlepost,'PostId'=>$PostId]);
+        return view('posts.show',['singlepost'=>$singlepost,'PostId'=>$PostId]);
     }
 
     public function create() {
-        return view('create');
+        return view('posts.create');
     }
 }
 

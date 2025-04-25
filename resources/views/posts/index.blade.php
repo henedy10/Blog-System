@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('posts.layouts.app')
 
 @section('title') Home @endsection
 
