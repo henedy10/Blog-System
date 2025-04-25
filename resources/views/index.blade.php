@@ -4,7 +4,7 @@
 
 @section('content')
       <div class="d-flex justify-content-center p-3">
-        <button class="btn btn-success " type="button">Create Post</button>
+        <a  href="{{route('posts.create')}}"  class="btn btn-success" >Create Post</a>
       </div>
       <table class="table" style="width:80%; margin:auto">
   <thead>

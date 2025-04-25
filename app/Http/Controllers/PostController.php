@@ -14,6 +14,7 @@ class PostController extends Controller
         ];
         return view('index',['allposts'=>$allposts]);
     }
+
     public function show($PostId){
         $singlepost=[
             ['id'=>1,'Title'=>'PHP','Posted_By'=>'Hamed','Created_At'=>'2022-10-10'],
@@ -21,6 +22,10 @@ class PostController extends Controller
             ['id'=>3,'Title'=>'Html','Posted_By'=>'Mhmd','Created_At'=>'2022-10-12']
         ];
         return view('show',['singlepost'=>$singlepost,'PostId'=>$PostId]);
+    }
+
+    public function create() {
+        return view('create');
     }
 }
 
