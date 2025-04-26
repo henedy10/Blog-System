@@ -34,5 +34,12 @@ class PostController extends Controller
         $created_post=request()->post_creator;
         return to_route('posts.index');
     }
+
+    public function edit($PostId){
+        return view('posts.edit',['PostId'=>$PostId]);
+    }
+    public function update(){
+        return to_route('posts.show');
+    }
 }
 
