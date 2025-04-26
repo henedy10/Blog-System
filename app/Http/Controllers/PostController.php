@@ -39,7 +39,7 @@ class PostController extends Controller
         return view('posts.edit',['PostId'=>$PostId]);
     }
     public function update(){
-        return to_route('posts.show');
+        return to_route('posts.show',1);
     }
 }
 

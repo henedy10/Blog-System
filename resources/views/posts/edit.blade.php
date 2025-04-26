@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="container_form mt-5" style="width: 75%; margin:auto;">
-    <form method="PUT" action="{{route('posts.update',$PostId)}}">
+    <form method="POST" action="{{route('posts.update',$PostId)}}">
+        @method('PUT')
         @csrf
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Title</label>
