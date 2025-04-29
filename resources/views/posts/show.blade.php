@@ -11,8 +11,8 @@
                 Post Info
             </div>
             <div class="card-body">
-                <h5 class="card-title">Title : {{$post['Title']}}</h5>
-                <p class="card-text">Description : {{$post['Title']}} is cool language</p>
+                <h5 class="card-title">Title : {{$post->title}}</h5>
+                <p class="card-text">Description : {{$post->title}} is cool language</p>
             </div>
         </div>
         <div class="card mt-5">
@@ -20,8 +20,8 @@
                 Post Creator Info
             </div>
             <div class="card-body">
-                <h5 class="card-title">Name : {{$post['Posted_By']}}</h5>
-                <p class="card-text">Created At : {{$post['Created_At']}}</p>
+                <h5 class="card-title">Name : {{$post->posted_by}}</h5>
+                <p class="card-text">Created At : {{$post->created_at}}</p>
             </div>
         </div>
     </div>
