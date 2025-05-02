@@ -34,16 +34,37 @@ class PostController extends Controller
         $title=request()->title;
         $description= request()->description;
         $created_post=request()->post_creator;
+
+        $post = new Post;
+        $post->title = $title;
+        $post->description = $description;
+        $post->posted_by = $created_post;
+        $post->save();
+
         return to_route('posts.index');
     }
 
-    public function edit($PostId){
-        return view('posts.edit',['PostId'=>$PostId]);
+    public function edit(Post $post){
+        return view('posts.edit',['post'=>$post]);
     }
-    public function update(){
-        return to_route('posts.show',1);
+
+    public function update($PostId){
+        $title=request()->title;
+        $description= request()->description;
+        $created_post=request()->post_creator;
+
+        $singlepostfromDB=Post::find($PostId);
+        $singlepostfromDB->update([
+            'title'=>$title,
+            'description'=>$description,
+            'posted_by'=>$created_post,
+        ]);
+
+        return to_route('posts.show',$PostId);
     }
-    public function destroy(){
+
+    public function destroy($PostId){
+        $deleted_post=Post::where('id',$PostId)->delete();
         return to_route('posts.index');
     }
 }
