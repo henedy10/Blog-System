@@ -16,13 +16,14 @@ class PostController extends Controller
         return view('posts.index',['allposts'=>$allposts]);
     }
 
-    public function show($PostId){
-        // $singlepostfromDB=Post::where('id',$PostId)->get();
-        // $singlepostfromDB=Post::where('id',$PostId)->first();
-        $singlepostfromDB=Post::find($PostId);
+    public function show(Post $post){
+        // // $singlepostfromDB=Post::where('id',$PostId)->get();
+        // // $singlepostfromDB=Post::where('id',$PostId)->first();
+        // $singlepostfromDB=Post::findOrfail($PostId);
 
-        $singlepost=$singlepostfromDB;
-        return view('posts.show',['post'=>$singlepost]);
+
+        // $singlepost=$singlepostfromDB;
+        return view('posts.show',['post'=>$post]);
     }
 
     public function create() {
