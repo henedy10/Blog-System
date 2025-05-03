@@ -29,7 +29,6 @@ class PostController extends Controller
 
     public function create() {
         $creators=User::all();
-        // dd($users);
         return view('posts.create',['creators'=>$creators]);
     }
 
@@ -41,14 +40,15 @@ class PostController extends Controller
         $post = new Post;
         $post->title = $title;
         $post->description = $description;
-        $post->posted_by = $created_post;
+        $post->user_id = $created_post;
         $post->save();
 
         return to_route('posts.index');
     }
 
     public function edit(Post $post){
-        return view('posts.edit',['post'=>$post]);
+        $creators=User::all();
+        return view('posts.edit',['post'=>$post,'creators'=>$creators]);
     }
 
     public function update($PostId){
@@ -60,7 +60,7 @@ class PostController extends Controller
         $singlepostfromDB->update([
             'title'=>$title,
             'description'=>$description,
-            'posted_by'=>$created_post,
+            'user_id'=>$created_post,
         ]);
 
         return to_route('posts.show',$PostId);
