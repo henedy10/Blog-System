@@ -18,7 +18,12 @@
 
         <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-            <input type="text" name="post_creator" class="form-control" id="exampleInputPassword1">
+            <select name="post_creator" id="">
+                @foreach ($creators as $create)
+                <option value="{{$create->name}}">{{$create->name}}</option>
+                @endforeach
+            </select>
+            {{-- <input type="text" name="post_creator" class="form-control" id="exampleInputPassword1"> --}}
         </div>
 
         <button type="submit" class="btn btn-success">Submit</button>
