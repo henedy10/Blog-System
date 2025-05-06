@@ -21,7 +21,7 @@
             <label for="exampleInputPassword1" class="form-label">Post Creator</label>
             <select name="post_creator" id="">
                 @foreach ($creators as $create)
-                <option  @selected($post->user->name==$create->name) value="{{$create->id}}">{{$create->name}}</option>
+                <option  @selected($post->user->id==$create->id) value="{{$create->id}}">{{$create->name}}</option>
                 @endforeach
             </select>
         </div>

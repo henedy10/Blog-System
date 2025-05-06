@@ -17,12 +17,13 @@
         </tr>
     </thead>
     <tbody>
-    @foreach ($allposts as $post)
-      <tr>
-        <th scope="row">{{$post->id}}</th>
-        <td>{{$post->title}}</td>
-        <td>{{$post->user->name}}</td>
-        <td>{{$post->created_at}}</td>
+        @foreach ($allposts as $post)
+        <tr>
+            <th scope="row">{{$post->id}}</th>
+            <td>{{$post->title}}</td>
+            <td>{{$post->user->name}}</td>
+            <td>{{$post->created_at->format('Y-m-d')}}</td>
+
         <td>
                 <a href="{{route('posts.show',$post->id)}}" class="btn btn-info">View</a>
                 <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
