@@ -18,8 +18,8 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
-        // // $singlepostfromDB=Post::where('id',$PostId)->get();
-        // // $singlepostfromDB=Post::where('id',$PostId)->first();
+        //  $singlepostfromDB=Post::where('id',$PostId)->get();
+        //  $singlepostfromDB=Post::where('id',$PostId)->first();
         // $singlepostfromDB=Post::findOrfail($PostId);
 
 
