@@ -37,6 +37,11 @@ class PostController extends Controller
         $description= request()->description;
         $created_post=request()->post_creator;
 
+        request()->validate([
+            'title'=>['required','min:3'],
+            'description'=>['required','min:5']
+        ]);
+
         $post = new Post;
         $post->title = $title;
         $post->description = $description;
