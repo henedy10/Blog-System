@@ -60,6 +60,10 @@ class PostController extends Controller
         $title=request()->title;
         $description= request()->description;
         $created_post=request()->post_creator;
+        request()->validate([
+            'title'=>['required','min:3'],
+            'description'=>['required','min:5']
+        ]);
 
         $singlepostfromDB=Post::find($PostId);
         $singlepostfromDB->update([
