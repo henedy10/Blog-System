@@ -39,7 +39,8 @@ class PostController extends Controller
 
         request()->validate([
             'title'=>['required','min:3'],
-            'description'=>['required','min:5']
+            'description'=>['required','min:5'],
+            'post_creator'=>['required','exists:users,id']
         ]);
 
         $post = new Post;
