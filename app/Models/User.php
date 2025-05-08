@@ -5,9 +5,12 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use LakM\Comments\Concerns\Commenter;
+use LakM\Comments\Contracts\CommenterContract;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements CommenterContract
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -45,4 +48,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    use Commenter;
 }
+

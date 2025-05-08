@@ -26,6 +26,9 @@
             <p class="card-text">Created At : {{$post->created_at}}</p>
         </div>
     </div>
+    <div class="card mt-5">
+        <x-comments::index :model="$post" />
+    </div>
 </div>
 
 
