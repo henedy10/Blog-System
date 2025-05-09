@@ -3,6 +3,7 @@
 @section('title') Edit Blog @endsection
 
 @section('content')
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -27,10 +28,10 @@
         </div>
 
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Post Creator</label>
-            <select name="post_creator" id="">
+            <label class="form-label">Post Creator</label>
+            <select name="post_creator" style="border-radius: 5px" >
                 @foreach ($creators as $create)
-                <option  @selected($post->user->id==$create->id) value="{{$create->id}}">{{$create->name}}</option>
+                <option   @selected($post->user->id==$create->id) value="{{$create->id}}">{{$create->name}}</option>
                 @endforeach
             </select>
         </div>

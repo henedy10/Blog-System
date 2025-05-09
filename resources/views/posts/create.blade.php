@@ -12,6 +12,8 @@
         </ul>
     </div>
 @endif
+
+
 <div class="container_form mt-5" style="width: 75%; margin:auto;">
     <form method="POST" action="{{route('posts.store')}}">
         @csrf

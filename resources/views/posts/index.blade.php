@@ -2,7 +2,18 @@
 
 @section('title') Home @endsection
 
+@section('search')
+    <div class="container-fluid  w-50 m-auto">
+        <form class="d-flex" action="" method="POST">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+@endsection
+
+
 @section('content')
+
       <div class="d-flex justify-content-center p-3">
         <a  href="{{route('posts.create')}}"  class="btn btn-success" >Create Post</a>
       </div>
