@@ -28,6 +28,7 @@
         </tr>
     </thead>
     <tbody>
+        @if (is_null($post))
         @foreach ($allposts as $post)
         <tr>
             <th scope="row">{{$post->id}}</th>
@@ -45,7 +46,28 @@
                 </form>
         </td>
       </tr>
-    @endforeach
+      @endforeach
+      @else
+      @foreach ($unique_post as $unique_post )
+      <tr>
+          <th scope="row">{{$unique_post->id}}</th>
+          <td>{{$unique_post->title}}</td>
+          <td>{{$unique_post->user->name}}</td>
+          <td>{{$unique_post->created_at->format('Y-m-d')}}</td>
+
+      <td>
+              <a href="{{route('posts.show',$unique_post->id)}}" class="btn btn-info">View</a>
+              <a href="{{route('posts.edit',$unique_post->id)}}" class="btn btn-primary">Edit</a>
+              <form style="display: inline;" method="POSt" action="{{route('posts.destroy',$unique_post->id)}}">
+                  @csrf
+                  @method('delete')
+                  <button type="submit" class="btn btn-danger">Delete</a>
+              </form>
+      </td>
+    </tr>
+        @endforeach
+
+        @endif
   </tbody>
 </table>
 @endsection

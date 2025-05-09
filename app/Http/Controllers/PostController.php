@@ -11,12 +11,11 @@ class PostController extends Controller
     public function index(){
         $post=request()->search;
         $unique_post=Post::where('title',$post)->get();
-        dd(is_null($post));
         $postsfromDB=Post::all();
 
         $allposts=$postsfromDB;
 
-        return view('posts.index',['allposts'=>$allposts]);
+        return view('posts.index',['allposts'=>$allposts,'post'=>$post,'unique_post'=>$unique_post]);
     }
 
     public function show(Post $post){
