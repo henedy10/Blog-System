@@ -9,7 +9,6 @@ use App\Models\User;
 class PostController extends Controller
 {
     public function index(){
-
         $postsfromDB=Post::all();
 
         $allposts=$postsfromDB;

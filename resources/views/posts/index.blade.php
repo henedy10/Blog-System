@@ -4,13 +4,13 @@
 
 @section('search')
     <div class="container-fluid  w-50 m-auto">
-        <form class="d-flex" action="" method="POST">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" action="{{route('posts.index')}}" method="get">
+            @csrf
+            <input class="form-control me-2" name="search" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
 @endsection
-
 
 @section('content')
 
