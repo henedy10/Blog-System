@@ -9,6 +9,9 @@ use App\Models\User;
 class PostController extends Controller
 {
     public function index(){
+        $post=request()->search;
+        $unique_post=Post::where('title',$post)->get();
+        dd(is_null($post));
         $postsfromDB=Post::all();
 
         $allposts=$postsfromDB;
