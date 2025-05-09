@@ -4,7 +4,7 @@
 
 @section('search')
     <div class="container-fluid  w-50 m-auto">
-        <form class="d-flex" action="{{route('posts.index')}}" method="get">
+        <form class="d-flex" action="{{route('posts.index')}}" method="GET">
             @csrf
             <input class="form-control me-2" name="search" type="text" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
@@ -29,45 +29,45 @@
     </thead>
     <tbody>
         @if (is_null($post))
-        @foreach ($allposts as $post)
-        <tr>
-            <th scope="row">{{$post->id}}</th>
-            <td>{{$post->title}}</td>
-            <td>{{$post->user->name}}</td>
-            <td>{{$post->created_at->format('Y-m-d')}}</td>
+            @foreach ($allposts as $post)
+                <tr>
+                        <th scope="row">{{$post->id}}</th>
+                        <td>{{$post->title}}</td>
+                        <td>{{$post->user->name}}</td>
+                        <td>{{$post->created_at->format('Y-m-d')}}</td>
 
-        <td>
-                <a href="{{route('posts.show',$post->id)}}" class="btn btn-info">View</a>
-                <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
-                <form style="display: inline;" method="POSt" action="{{route('posts.destroy',$post->id)}}">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Delete</a>
-                </form>
-        </td>
-      </tr>
-      @endforeach
-      @else
-      @foreach ($unique_post as $unique_post )
-      <tr>
-          <th scope="row">{{$unique_post->id}}</th>
-          <td>{{$unique_post->title}}</td>
-          <td>{{$unique_post->user->name}}</td>
-          <td>{{$unique_post->created_at->format('Y-m-d')}}</td>
+                    <td>
+                            <a href="{{route('posts.show',$post->id)}}" class="btn btn-info">View</a>
+                            <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
+                            <form style="display: inline;" method="POSt" action="{{route('posts.destroy',$post->id)}}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</a>
+                            </form>
+                    </td>
+                </tr>
+            @endforeach
+        @else
+            @foreach ($unique_post as $unique_post )
+                <tr>
+                        <th scope="row">{{$unique_post->id}}</th>
+                        <td>{{$unique_post->title}}</td>
+                        <td>{{$unique_post->user->name}}</td>
+                        <td>{{$unique_post->created_at->format('Y-m-d')}}</td>
 
-      <td>
-              <a href="{{route('posts.show',$unique_post->id)}}" class="btn btn-info">View</a>
-              <a href="{{route('posts.edit',$unique_post->id)}}" class="btn btn-primary">Edit</a>
-              <form style="display: inline;" method="POSt" action="{{route('posts.destroy',$unique_post->id)}}">
-                  @csrf
-                  @method('delete')
-                  <button type="submit" class="btn btn-danger">Delete</a>
-              </form>
-      </td>
-    </tr>
-        @endforeach
+                    <td>
+                            <a href="{{route('posts.show',$unique_post->id)}}" class="btn btn-info">View</a>
+                            <a href="{{route('posts.edit',$unique_post->id)}}" class="btn btn-primary">Edit</a>
+                            <form style="display: inline;" method="POST" action="{{route('posts.destroy',$unique_post->id)}}">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</a>
+                            </form>
+                    </td>
+                </tr>
+            @endforeach
 
         @endif
-  </tbody>
+    </tbody>
 </table>
 @endsection
