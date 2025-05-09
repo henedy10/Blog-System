@@ -19,12 +19,7 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
-        //  $singlepostfromDB=Post::where('id',$PostId)->get();
-        //  $singlepostfromDB=Post::where('id',$PostId)->first();
-        // $singlepostfromDB=Post::findOrfail($PostId);
 
-
-        // $singlepost=$singlepostfromDB;
         return view('posts.show',['post'=>$post]);
     }
 
@@ -80,8 +75,6 @@ class PostController extends Controller
     public function destroy($PostId){
         $post=Post::find($PostId);
         $deleted_post=$post->delete();
-
-        // $deleted_post=Post::where('id',$PostId)->delete();
         return to_route('posts.index');
     }
 }
