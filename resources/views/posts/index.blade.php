@@ -14,17 +14,18 @@
 
 @section('content')
 
-      <div class="d-flex justify-content-center p-3">
+    <div class="d-flex justify-content-center p-3">
         <a  href="{{route('posts.create')}}"  class="btn btn-success" >Create Post</a>
-      </div>
-      <table class="table" style="width:80%; margin:auto">
-  <thead>
-      <tr>
-          <th scope="col">#</th>
-          <th scope="col">Title</th>
-          <th scope="col">Posted By</th>
-          <th scope="col">Created At</th>
-          <th scope="col">Actions</th>
+    </div>
+
+    <table class="table" style="width:80%; margin:auto">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Posted By</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
