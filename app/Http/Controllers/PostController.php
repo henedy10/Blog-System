@@ -15,17 +15,17 @@ class PostController extends Controller
 
         $allposts=$postsfromDB;
 
-        return view('posts.index',['allposts'=>$allposts,'post'=>$post,'unique_post'=>$unique_post]);
+        return view('posts.index',compact('allposts','post','unique_post'));
     }
 
     public function show(Post $post){
 
-        return view('posts.show',['post'=>$post]);
+        return view('posts.show',compact('post'));
     }
 
     public function create() {
         $creators=User::all();
-        return view('posts.create',['creators'=>$creators]);
+        return view('posts.create',compact('creators'));
     }
 
     public function store() {
@@ -45,12 +45,12 @@ class PostController extends Controller
         $post->user_id = $created_post;
         $post->save();
 
-        return to_route('posts.index');
+        return redirect()->route('posts.index');
     }
 
     public function edit(Post $post){
         $creators=User::all();
-        return view('posts.edit',['post'=>$post,'creators'=>$creators]);
+        return view('posts.edit',compact('post','creators'));
     }
 
     public function update($PostId){
@@ -69,13 +69,13 @@ class PostController extends Controller
             'user_id'=>$created_post,
         ]);
 
-        return to_route('posts.show',$PostId);
+        return redirect()->route('posts.show',$PostId);
     }
 
     public function destroy($PostId){
         $post=Post::find($PostId);
         $deleted_post=$post->delete();
-        return to_route('posts.index');
+        return redirect()->route('posts.index')->with('success','تم الحذف بنجاح');
     }
 }
 
