@@ -17,7 +17,12 @@
     <div class="d-flex justify-content-center p-3">
         <a  href="{{route('posts.create')}}"  class="btn btn-success" >Create Post</a>
     </div>
+@if ($allposts->isEmpty())
+    <div class="bg-red-300 rounded p-3">
 
+        <p class="text-red-500 font-bold">* There is no posts now</p>
+    </div>
+@else
     <table class="table" style="width:80%; margin:auto">
     <thead>
         <tr>
@@ -67,9 +72,10 @@
                     </td>
                 </tr>
             @endforeach
-
         @endif
     </tbody>
-</table>
+    </table>
+
+@endif
 @endsection
 
