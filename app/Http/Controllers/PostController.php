@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use LakM\Comments\Reactions\Like;
 
 class PostController extends Controller
 {
     public function index(){
         $post=request()->search;
-        $unique_post=Post::where('title',$post)->get();
+        $unique_post=Post::where('title','like','%'.$post.'%')->get();
         $postsfromDB=Post::all();
 
         $allposts=$postsfromDB;
