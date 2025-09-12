@@ -9,9 +9,8 @@ use LakM\Comments\Contracts\CommentableContract;
 
 class Post extends Model implements CommentableContract
 {
-    protected $fillable=[
-        'title','description','user_id',
-    ];
+    protected $guarded=[];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
