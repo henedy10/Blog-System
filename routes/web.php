@@ -3,10 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
-Route::get('/',[PostController::class,'index'])->name('posts.index');
-Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
-Route::post('/posts',[PostController::class,'store'])->name('posts.store');
-Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update');
-Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('posts.edit');
-Route::get('/posts/{post}',[PostController::class,'show'])->name('posts.show');
-Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('posts.destroy');
+Route::controller(PostController::class)->group(function(){
+    Route::name('posts.')->group(function(){
+        Route::get('/','index')->name('index');
+        Route::get('/posts/create','create')->name('create');
+        Route::post('/posts','store')->name('store');
+        Route::put('/posts/{post}','update')->name('update');
+        Route::get('/posts/{post}/edit','edit')->name('edit');
+        Route::get('/posts/{post}','show')->name('show');
+        Route::delete('/posts/{post}','destroy')->name('destroy');
+    });
+});

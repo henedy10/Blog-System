@@ -3,9 +3,6 @@
 @section('title') blog @endsection
 
 @section('content')
-
-
-
 <div class="container_cards" style="width: 75%; margin: auto">
     <div class="card mt-5">
         <div class="card-header">
@@ -16,6 +13,7 @@
             <p class="card-text">Description : {{$post->description}}</p>
         </div>
     </div>
+
     <div class="card mt-5">
         <div class="card-header">
             Post Creator Info
@@ -27,7 +25,4 @@
         </div>
     </div>
 </div>
-
-
 @endsection
-
