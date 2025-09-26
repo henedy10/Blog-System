@@ -3,6 +3,15 @@
 @section('title') blog @endsection
 
 @section('content')
+
+@if(session('successUpdatePost'))
+    <div class="d-flex justify-content-center align-items-center mt-1">
+        <span class="alert alert-success text-center w-50">
+            {{session('successUpdatePost')}}
+        </span>
+    </div>
+@endif
+
 <div class="container_cards" style="width: 75%; margin: auto">
     <div class="card mt-5">
         <div class="card-header">

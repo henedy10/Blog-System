@@ -3,6 +3,14 @@
         <input class="form-control me-2" type="text" wire:model.live="query"  placeholder="Search Posts, Authors" >
     </div>
 
+    @if(session('successCreatePost'))
+        <div class="d-flex justify-content-center align-items-center mt-1">
+            <span class="alert alert-success text-center w-50">
+                {{session('successCreatePost')}}
+            </span>
+        </div>
+    @endif
+
     <div class="d-flex justify-content-center p-3">
         <a  href="{{route('posts.create')}}"  class="btn btn-success" >Create Post</a>
     </div>

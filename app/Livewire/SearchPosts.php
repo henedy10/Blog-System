@@ -15,12 +15,16 @@ class SearchPosts extends Component
     }
 
     public function render(){
-        $posts=Post::with('user')
-                    ->where('title','LIKE','%' . $this->query . '%')
-                    ->orWhereHas('user',function($q){
-                        $q->where('name','LIKE' ,'%' . $this->query . '%');
-                    })
-                    ->simplePaginate(5);
+        if(!empty($this->query)){
+            $posts = Post::with('user')
+            ->where('title','LIKE','%' . $this->query . '%')
+            ->orWhereHas('user',function($q){
+                $q->where('name','LIKE' ,'%' . $this->query . '%');
+            })
+            ->simplePaginate(5);
+        }else{
+            $posts = Post::with('user')->simplePaginate(5);
+        }
 
         return view('livewire.search-posts',['posts' => $posts ]);
     }

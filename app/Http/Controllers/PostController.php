@@ -37,7 +37,7 @@ class PostController extends Controller
         $post->user_id     = $created_post;
         $post->save();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }
 
     public function edit(Post $post){
@@ -61,7 +61,7 @@ class PostController extends Controller
             'user_id'      => $created_post,
         ]);
 
-        return redirect()->route('posts.show',$PostId);
+        return redirect()->route('posts.show',$PostId)->with(['successUpdatePost' => 'Post updated successfully']);
     }
 
     public function destroy(Post $post){

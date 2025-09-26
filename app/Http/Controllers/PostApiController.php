@@ -35,7 +35,7 @@ class PostApiController extends Controller
 
     public function index(){
         $search = request()->query('search');
-        $posts  = Post::select('title','description','created_at','user_id')->with('user')
+        $posts  = Post::with('user')
         ->where('title','LIKE','%' . $search . '%')
         ->orWhereHas('user',function($q) use($search){
             $q->where('name','LIKE' ,'%' . $search . '%');
