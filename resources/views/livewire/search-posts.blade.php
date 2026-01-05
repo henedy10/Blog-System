@@ -36,7 +36,7 @@
                     <td>{{$post->user->name}}</td>
                     <td>{{$post->created_at->format('Y-m-d')}}</td>
                     <td>
-                        <a href="{{route('posts.show',$post->id)}}" class="btn btn-info">View</a>
+                        <a href="{{route('posts.show',$post->slug)}}" class="btn btn-info">View</a>
                         <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
                         <form style="display: inline;" method="POSt" action="{{route('posts.destroy',$post->id)}}" onsubmit="return confirmDelete();">
                             @csrf

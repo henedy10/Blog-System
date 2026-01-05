@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Post,User};
+use App\Http\Requests\PostRequest;
+use App\Models\
+{
+    Post,
+    User
+};
 
 class PostController extends Controller
 {
-    public function index(){
-        return view('posts.index');
-    }
-
     public function show(Post $post){
-
         return view('posts.show',compact('post'));
     }
 
@@ -20,22 +20,13 @@ class PostController extends Controller
         return view('posts.create',compact('creators'));
     }
 
-    public function store() {
-        $title        = request()->title;
-        $description  = request()->description;
-        $created_post = request()->post_creator;
+    public function store(PostRequest $request) {
 
-        request()->validate([
-            'title'        => ['required','min:3'],
-            'description'  => ['required','min:5'],
-            'post_creator' => ['required','exists:users,id']
+        Post::create([
+            'title'       => $request->title,
+            'description' => $request->description,
+            'user_id'     => $request->post_creator
         ]);
-
-        $post              = new Post;
-        $post->title       = $title;
-        $post->description = $description;
-        $post->user_id     = $created_post;
-        $post->save();
 
         return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }
@@ -45,28 +36,20 @@ class PostController extends Controller
         return view('posts.edit',compact('post','creators'));
     }
 
-    public function update($PostId){
-        $title         = request()->title;
-        $description   = request()->description;
-        $created_post  = request()->post_creator;
-        request()->validate([
-            'title'        => ['required','min:3'],
-            'description'  => ['required','min:5']
+    public function update($PostId,PostRequest $request){
+        $Post  = Post::findOrFail($PostId);
+        $Post->update([
+            'title'        => $request->title,
+            'description'  => $request->description,
+            'user_id'      => $request->post_creator,
         ]);
 
-        $singlepostfromDB  = Post::find($PostId);
-        $singlepostfromDB->update([
-            'title'        => $title,
-            'description'  => $description,
-            'user_id'      => $created_post,
-        ]);
-
-        return redirect()->route('posts.show',$PostId)->with(['successUpdatePost' => 'Post updated successfully']);
+        return redirect()->route('posts.show',$Post->slug)->with(['successUpdatePost' => 'Post is updated successfully']);
     }
 
     public function destroy(Post $post){
         $post->delete();
-        return redirect()->route('posts.index')->with('success','تم الحذف بنجاح');
+        return redirect()->route('posts.index')->with('success','Post is deleted successfully');
     }
 }
 
