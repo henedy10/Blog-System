@@ -31,6 +31,8 @@
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
+        <div class="g-recaptcha" data-sitekey={{env('RECAPTCHA_SITE_KEY')}}></div>
+        <x-input-error :messages="$errors->get('g-recaptcha-response')" class="mt-2" />
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
