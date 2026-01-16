@@ -7,6 +7,7 @@
         <form method="POST" action="{{route('posts.update',$post->id)}}">
             @method('PUT')
             @csrf
+            <input type="hidden" name="post_creator" value="{{Auth::id()}}">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Title</label>
                 <input type="text" name="title" value="{{$post->title}}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -23,17 +24,6 @@
                 @enderror
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Post Creator</label>
-                <select name="post_creator" style="border-radius: 5px" >
-                    @foreach ($creators as $create)
-                        <option   @selected($post->user->id==$create->id) value="{{$create->id}}">{{$create->name}}</option>
-                    @endforeach
-                </select>
-                @error('post_creator')
-                    <span class="text-danger">{{"* ".$message}}</span>
-                @enderror
-            </div>
             <button type="submit" class="btn btn-primary"> Update </button>
         </form>
     </div>

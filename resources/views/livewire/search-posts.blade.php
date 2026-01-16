@@ -21,7 +21,6 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Posted By</th>
                     <th scope="col">Created At</th>
                     <th scope="col">Actions</th>
                 </tr>
@@ -33,12 +32,11 @@
                 <tr>
                     <th scope="row">{{( $posts->firstItem() ?? 0 ) + $loop->index}}</th>
                     <td>{{$post->title}}</td>
-                    <td>{{$post->user->name}}</td>
                     <td>{{$post->created_at->format('Y-m-d')}}</td>
                     <td>
                         <a href="{{route('posts.show',$post->slug)}}" class="btn btn-info">View</a>
-                        <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary">Edit</a>
-                        <form style="display: inline;" method="POSt" action="{{route('posts.destroy',$post->id)}}" onsubmit="return confirmDelete();">
+                        <a href="{{route('posts.edit',$post->slug)}}" class="btn btn-primary">Edit</a>
+                        <form style="display: inline;" method="POST" action="{{route('posts.destroy',$post->id)}}" onsubmit="return confirmDelete();">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">Delete</a>
