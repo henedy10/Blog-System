@@ -5,5 +5,3 @@
 @section('content')
     @livewire('search-posts')
 @endsection
-
-
