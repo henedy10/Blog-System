@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use LakM\Comments\Concerns\Commenter;
 use LakM\Comments\Contracts\CommenterContract;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 
 class User extends Authenticatable implements CommenterContract
@@ -51,6 +53,14 @@ class User extends Authenticatable implements CommenterContract
             'password' => 'hashed',
         ];
     }
+
+    protected function role():Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucfirst($value),
+        );
+    }
+
     use Commenter;
 }
 

@@ -57,6 +57,17 @@
                                 </svg>
                                 {{$post->created_at->format('M d, Y')}}
                             </span>
+
+                            @php
+                                $colors = [
+                                    'pending' => 'bg-yellow-100 text-yellow-800',
+                                    'accepted' => 'bg-green-100 text-green-800',
+                                    'rejected' => 'bg-red-100 text-red-800',
+                                ];
+                            @endphp
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-medium capitalize {{$colors[$post->status]}}">
+                                {{$post->status}}
+                            </span>
                         </div>
                         <h3
                             class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
@@ -70,15 +81,28 @@
                     </div>
 
                     <div class="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex items-center justify-between">
-                        <a href="{{route('posts.show', $post->slug)}}"
-                            class="text-sm font-semibold text-indigo-600 hover:text-indigo-500 transition-colors inline-flex items-center group/link">
-                            Read more
-                            <svg class="ml-1 h-4 w-4 transform group-hover/link:translate-x-1 transition-transform"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </a>
+                        <div class="flex items-center space-x-4">
+                            <a href="{{route('posts.show', $post->slug)}}"
+                                class="text-sm font-semibold text-indigo-600 hover:text-indigo-500 transition-colors inline-flex items-center group/link">
+                                Read more
+                                <svg class="ml-1 h-4 w-4 transform group-hover/link:translate-x-1 transition-transform"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                            <!-- Like Button -->
+                            <button
+                                class="flex items-center space-x-1 text-gray-400 hover:text-red-500 transition-colors group/like">
+                                <svg class="h-5 w-5 transform group-hover/like:scale-110 transition-transform" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                </svg>
+                                <span class="text-xs group-hover/like:text-red-500">Like</span>
+                            </button>
+                        </div>
+
                         <div class="flex items-center space-x-1">
                             <a href="{{route('posts.edit', $post->slug)}}"
                                 class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-full transition-all"

@@ -69,7 +69,7 @@
                                 <button class="flex items-center gap-3 pl-3 pr-2 py-1.5 rounded-full hover:bg-slate-100 transition-colors focus:outline-none ring-2 ring-transparent focus:ring-indigo-100">
                                     <div class="text-right hidden md:block">
                                          <p class="text-sm font-semibold text-slate-700 leading-none">{{ Auth::user()->name }}</p>
-                                         <p class="text-xs text-slate-400 mt-0.5">{{ Str::ucfirst(Auth::user()->role)}}</p>
+                                         <p class="text-xs text-slate-400 mt-0.5">{{Auth::user()->role}}</p>
                                     </div>
                                     <div class="h-9 w-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 p-0.5 shadow-md">
                                         <div class="h-full w-full rounded-full bg-slate-50 flex items-center justify-center text-indigo-700 font-bold text-sm">

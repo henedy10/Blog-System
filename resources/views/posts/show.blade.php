@@ -62,6 +62,17 @@
                             </svg>
                             {{$post->created_at->format('F d, Y')}}
                         </span>
+                        <span class="text-gray-300">&bull;</span>
+                        @php
+                            $colors = [
+                                'pending' => 'bg-yellow-100 text-yellow-800',
+                                'accepted' => 'bg-green-100 text-green-800',
+                                'rejected' => 'bg-red-100 text-red-800',
+                            ];
+                        @endphp
+                        <span class="px-2.5 py-0.5 rounded-full text-xs font-medium capitalize {{$colors[$post->status]}}">
+                            {{$post->status}}
+                        </span>
                     </div>
 
                     <h1
@@ -73,7 +84,127 @@
                 <div class="prose prose-indigo prose-lg text-gray-600 mx-auto">
                     <p class="whitespace-pre-line leading-relaxed">{{$post->description}}</p>
                 </div>
+
+                <div class="mt-8 flex justify-center">
+                    <button
+                        class="flex items-center space-x-2 text-gray-500 hover:text-red-500 transition-colors group/like px-4 py-2 rounded-full hover:bg-red-50">
+                        <svg class="h-6 w-6 transform group-hover/like:scale-110 transition-transform" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>
+                        <span class="font-medium">Like</span>
+                    </button>
+                </div>
             </div>
         </article>
+
+        <!-- Mock Comments Section -->
+        <div class="mt-12 max-w-3xl mx-auto">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Comments (3)</h3>
+
+            <div class="space-y-6">
+                <!-- Comment 1 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div
+                                class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
+                                JD
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-sm font-bold text-gray-900">John Doe</h4>
+                                <span class="text-xs text-gray-500">2 hours ago</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3">
+                                This is a fantastic article! I really appriciate the insights you shared. unexpected and
+                                very helpful.
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <button
+                                    class="flex items-center space-x-1 text-gray-400 hover:text-red-500 transition-colors group/comment-like">
+                                    <svg class="h-4 w-4 transform group-hover/comment-like:scale-110 transition-transform"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                    <span class="text-xs">Like</span>
+                                </button>
+                                <button class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment 2 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div
+                                class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold">
+                                AS
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-sm font-bold text-gray-900">Alice Smith</h4>
+                                <span class="text-xs text-gray-500">5 hours ago</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3">
+                                I have a question about the second point. Could you elaborate more on how that impacts
+                                performance?
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <button
+                                    class="flex items-center space-x-1 text-gray-400 hover:text-red-500 transition-colors group/comment-like">
+                                    <svg class="h-4 w-4 transform group-hover/comment-like:scale-110 transition-transform"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                    <span class="text-xs">Like</span>
+                                </button>
+                                <button class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment 3 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex items-start space-x-4">
+                        <div class="flex-shrink-0">
+                            <div
+                                class="h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 font-bold">
+                                MK
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-1">
+                                <h4 class="text-sm font-bold text-gray-900">Mike Kite</h4>
+                                <span class="text-xs text-gray-500">1 day ago</span>
+                            </div>
+                            <p class="text-gray-600 text-sm mb-3">
+                                Great read, thanks for sharing!
+                            </p>
+                            <div class="flex items-center space-x-4">
+                                <button
+                                    class="flex items-center space-x-1 text-gray-400 hover:text-red-500 transition-colors group/comment-like">
+                                    <svg class="h-4 w-4 transform group-hover/comment-like:scale-110 transition-transform"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                    <span class="text-xs">Like</span>
+                                </button>
+                                <button class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">Reply</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

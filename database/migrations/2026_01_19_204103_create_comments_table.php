@@ -13,18 +13,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->nullableMorphs('commentable');
-            $table->nullableMorphs('commenter');
-            $table->unsignedBigInteger('reply_id')->nullable()->index();
-
-            $table->text('text');
-            $table->boolean('approved')->default(false)->index();
-
+            $table->foreignId('user_id')->nullable()->constrained('users','id')->onDelete('set null');
+            $table->foreignId('post_id')->constrained('posts','id')->onDelete('cascade');
+            $table->string('comment');
             $table->timestamps();
-        });
-
-        Schema::table('comments', function (Blueprint $table) {
-            $table->foreign('reply_id')->references('id')->on('comments')->cascadeOnDelete();
         });
     }
 

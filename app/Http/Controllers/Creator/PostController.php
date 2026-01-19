@@ -18,8 +18,8 @@ class PostController extends Controller
         return view('posts.index',compact('posts'));
     }
 
-    public function show($slug){
-        $post = Post::select('title','description','created_at')->where('slug',$slug)->first();
+    public function show(Post $post){
+        $post->setVisible(['title','description','created_at']);
         return view('posts.show',compact('post'));
     }
 
@@ -38,13 +38,11 @@ class PostController extends Controller
         return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }
 
-    public function edit($slug){
-        $post = Post::where('slug',$slug)->first();
+    public function edit(Post $post){
         return view('posts.edit',compact('post'));
     }
 
-    public function update($PostId,PostRequest $request){
-        $Post  = Post::findOrFail($PostId);
+    public function update(Post $Post,PostRequest $request){
         $Post->update([
             'title'        => $request->title,
             'description'  => $request->description,
