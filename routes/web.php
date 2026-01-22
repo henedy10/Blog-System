@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/dashboard', function () {
-    if(Auth::user()->role == 'creator')
+    if(Auth::user()->role == 'Creator'){
         return view('posts.index');
+    }
+    
+    return view('dashboard');
+
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

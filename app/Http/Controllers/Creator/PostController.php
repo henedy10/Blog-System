@@ -14,12 +14,12 @@ use App\Models\
 class PostController extends Controller
 {
     public function index(){
-        $posts = User::select('id','title','created_at')->where('id',Auth::id());
+        $posts = Post::select('id','title','created_at')->where('user_id',Auth::id());
         return view('posts.index',compact('posts'));
     }
 
     public function show(Post $post){
-        $post->setVisible(['title','description','created_at']);
+        $post->load('comments')->loadCount('comments');
         return view('posts.show',compact('post'));
     }
 

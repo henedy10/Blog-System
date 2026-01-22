@@ -6,13 +6,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use LakM\Comments\Concerns\Commenter;
-use LakM\Comments\Contracts\CommenterContract;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 
-class User extends Authenticatable implements CommenterContract
+class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -30,6 +28,9 @@ class User extends Authenticatable implements CommenterContract
 
     public function posts(){
         return $this->hasMany(Post::class);
+    }
+    public function comments(){
+        return $this->hasMany(Comment::class);
     }
     /**
      * The attributes that should be hidden for serialization.
@@ -60,7 +61,5 @@ class User extends Authenticatable implements CommenterContract
             get: fn (string $value) => ucfirst($value),
         );
     }
-
-    use Commenter;
 }
 
