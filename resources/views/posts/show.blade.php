@@ -85,17 +85,6 @@
                     <p class="whitespace-pre-line leading-relaxed">{{$post->description}}</p>
                 </div>
 
-                {{-- <div class="mt-8 flex justify-center">
-                    <button
-                        class="flex items-center space-x-2 text-gray-500 hover:text-red-500 transition-colors group/like px-4 py-2 rounded-full hover:bg-red-50">
-                        <svg class="h-6 w-6 transform group-hover/like:scale-110 transition-transform" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
-                        <span class="font-medium">Like</span>
-                    </button>
-                </div> --}}
             </div>
         </article>
 
@@ -103,7 +92,7 @@
         <div class="mt-12 max-w-3xl mx-auto">
             <div class="mt-8 flex justify-center text-red-500">
                 <h3 class="mb-6 mr-5">Comments ({{$post->comments_count}})</h3>
-                <h3>Likes(0)</h3>
+                <h3>Likes({{$post->likes_count}})</h3>
             </div>
             <div class="space-y-6">
                 @forelse ( $post->comments as $comment )
@@ -112,7 +101,7 @@
                             <div class="flex-shrink-0">
                                 <div
                                     class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
-                                    JD
+                                    {{strtoupper($comment->user->name[0])}}
                                 </div>
                             </div>
                             <div class="flex-1">
@@ -122,15 +111,7 @@
                                 </div>
                                 <p class="text-gray-600 text-sm mb-3">{{$comment->comment}}</p>
                                 <div class="flex items-center space-x-4">
-                                    <button
-                                        class="flex items-center space-x-1 text-gray-400 hover:text-red-500 transition-colors group/comment-like">
-                                        <svg class="h-4 w-4 transform group-hover/comment-like:scale-110 transition-transform"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                        </svg>
-                                        <span class="text-xs">Like</span>
-                                    </button>
+                                    @livewire('like-button',['comment' => $comment])
                                     <button class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">Reply</button>
                                 </div>
                             </div>
