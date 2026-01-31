@@ -95,28 +95,8 @@
                 <h3>Likes({{$post->likes_count}})</h3>
             </div>
             <div class="space-y-6">
-                @forelse ( $post->comments as $comment )
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-                        <div class="flex items-start space-x-4">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
-                                    {{strtoupper($comment->user->name[0])}}
-                                </div>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex items-center justify-between mb-1">
-                                    <h4 class="text-sm font-bold text-gray-900">{{$comment->user->name}}</h4>
-                                    <span class="text-xs text-gray-500">2 hours ago</span>
-                                </div>
-                                <p class="text-gray-600 text-sm mb-3">{{$comment->comment}}</p>
-                                <div class="flex items-center space-x-4">
-                                    @livewire('like-button',['comment' => $comment])
-                                    <button class="text-xs text-gray-400 hover:text-indigo-600 transition-colors">Reply</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                @forelse ($post->comments as $comment)
+                    @include('posts.comments.comment',['comment' => $comment , 'post_id' => $post->id])
                 @empty
                     <div
                         class="col-span-full flex flex-col items-center justify-center py-16 px-4 text-center bg-white rounded-xl shadow-sm border border-gray-100">

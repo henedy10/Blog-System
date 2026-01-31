@@ -19,7 +19,16 @@ class PostController extends Controller
     }
 
     public function show(Post $post){
-        $post->load('comments')
+        $post->load([
+            'comments' => function($q){
+                $q->withCount('replies')
+                ->with([
+                    'replies' => function($q){
+                        $q->withCount('replies');
+                    }
+                ]);
+            }
+            ])
             ->loadCount('comments')
             ->loadCount('likes');
         return view('posts.show',compact('post'));
