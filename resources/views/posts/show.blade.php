@@ -87,29 +87,37 @@
 
             </div>
         </article>
+        @if ($post->status === 'accepted')
+            <!-- Mock Comments Section -->
+            <div class="mt-12 max-w-3xl mx-auto">
 
-        <!-- Mock Comments Section -->
-        <div class="mt-12 max-w-3xl mx-auto">
-            <div class="mt-8 flex justify-center text-red-500">
-                <h3 class="mb-6 mr-5">Comments ({{$post->comments_count}})</h3>
-                <h3>Likes({{$post->likes_count}})</h3>
-            </div>
-            <div class="space-y-6">
-                @forelse ($post->comments as $comment)
-                    @include('posts.comments.comment',['comment' => $comment , 'post_id' => $post->id])
-                @empty
-                    <div
-                        class="col-span-full flex flex-col items-center justify-center py-16 px-4 text-center bg-white rounded-xl shadow-sm border border-gray-100">
-                        <div class="bg-gray-50 rounded-full p-4 mb-4">
-                            <svg class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
+                <div class="flex items-center gap-6 text-sm text-gray-500 mb-6">
+                    <span>
+                        💬 {{ $post->comments_count }} Comments
+                    </span>
+
+                    <span>
+                        ❤️ {{ $post->likes_count }} Likes
+                    </span>
+                </div>
+
+                <div class="space-y-6">
+                    @forelse ($post->comments as $comment)
+                        @include('posts.comments.comment',['comment' => $comment , 'post_id' => $post->id])
+                    @empty
+                        <div
+                            class="col-span-full flex flex-col items-center justify-center py-16 px-4 text-center bg-white rounded-xl shadow-sm border border-gray-100">
+                            <div class="bg-gray-50 rounded-full p-4 mb-4">
+                                <svg class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-1">No comments found</h3>
                         </div>
-                        <h3 class="text-lg font-medium text-gray-900 mb-1">No comments found</h3>
-                    </div>
-                @endforelse
+                    @endforelse
+                </div>
             </div>
-        </div>
+        @endif
     </div>
 @endsection

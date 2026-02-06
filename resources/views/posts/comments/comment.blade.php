@@ -31,25 +31,21 @@
             </p>
 
             <!-- Actions -->
-            <div class="flex items-center space-x-4 text-xs">
+            <div class="flex items-center gap-4 text-xs text-gray-500 mt-3">
                 @livewire('like-button', ['comment' => $comment])
 
-                <!-- Reply Button -->
                 <button
+                    class="hover:text-indigo-600 transition"
                     @click="replyFormOpen = !replyFormOpen"
-                    class="text-gray-400 hover:text-indigo-600 transition-colors">
+                >
                     Reply
                 </button>
 
-                <!-- Replies Count Button -->
                 @if ($comment->replies_count > 0)
-                    <button
-                        @click="repliesOpen = !repliesOpen"
-                        class="text-gray-400 hover:text-indigo-600 transition-colors">
-                        Replies ({{ $comment->replies_count }})
-                    </button>
+                    @livewire('load-replies',['comment' => $comment])
                 @endif
             </div>
+
 
             <!-- Reply Form -->
             <div
@@ -86,16 +82,18 @@
             </div>
 
             <!-- Replies -->
-            <div
-                x-show="repliesOpen"
-                x-transition
-                class="mt-4 space-y-4 pl-6 border-l border-gray-200"
-                style="display: none;"
-            >
-                @foreach ($comment->replies as $reply)
-                    @include('posts.comments.comment', ['comment' => $reply])
-                @endforeach
-            </div>
+            @if($comment->relationLoaded('replies'))
+                <div
+                    x-show="repliesOpen"
+                    x-transition
+                    class="mt-4 space-y-4 pl-6 border-l border-gray-200"
+                    style="display: none;"
+                >
+                    @foreach ($comment->replies as $reply)
+                        @include('posts.comments.comment', ['comment' => $reply])
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
 </div>

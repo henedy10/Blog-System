@@ -1,15 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\Creator;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\
-{
-    Post,
-    User
-};
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -20,17 +15,11 @@ class PostController extends Controller
 
     public function show(Post $post){
         $post->load([
-            'comments' => function($q){
-                $q->withCount('replies')
-                ->with([
-                    'replies' => function($q){
-                        $q->withCount('replies');
-                    }
-                ]);
-            }
+                'comments' => function($q){
+                    $q->withCount('replies');
+                }
             ])
-            ->loadCount('comments')
-            ->loadCount('likes');
+            ->loadCount(['comments','likes']);
         return view('posts.show',compact('post'));
     }
 
