@@ -21,8 +21,7 @@
                     {{ $comment->user->name }}
                 </h4>
                 <span class="text-xs text-gray-500">
-                    {{-- {{ $comment->created_at->diffForHumans() }} --}}
-                    N
+                    {{ $comment->created_at->diffForHumans() }}
                 </span>
             </div>
 

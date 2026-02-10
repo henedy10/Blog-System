@@ -3,14 +3,12 @@ namespace App\Http\Controllers\Creator;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::select('id','title','created_at')->where('user_id',Auth::id())->cursor();
-        return view('posts.index',compact('posts'));
+        return view('posts.index');
     }
 
     public function show(Post $post){
