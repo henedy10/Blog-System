@@ -11,7 +11,7 @@ Route::get('/dashboard', function () {
         return redirect()->route('posts.index');
     }
 
-    return view('dashboard');
+    return redirect()->route('filament.admin.pages.dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
