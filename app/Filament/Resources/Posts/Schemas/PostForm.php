@@ -13,16 +13,10 @@ class PostForm
     {
         return $schema
             ->components([
-                TextInput::make('title')
-                    ->disabled(),
+                TextInput::make('title'),
                 Textarea::make('description')
-                    ->disabled()
                     ->columnSpanFull(),
-                // TextInput::make('user_id')
-                //     ->required()
-                //     ->numeric(),
-                // TextInput::make('slug')
-                //     ->required(),
+
                 Select::make('status')
                 ->options([
                     'accepted' => 'Accepted',

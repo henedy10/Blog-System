@@ -20,18 +20,20 @@ class PostsTable
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                // TextColumn::make('user_id')
-                //     ->numeric()
-                //     ->sortable(),
-                // TextColumn::make('slug')
-                //     ->searchable(),
+                    ->toggleable(),
                 TextColumn::make('status')
-                    ->searchable(),
+                    ->searchable()
+                    ->badge()
+                    ->colors([
+                        'success' => 'accepted',
+                        'warning' => 'pending',
+                        'danger'  => 'rejected'
+                    ])
+                    ->alignCenter(),
             ])
             ->filters([
                 //
@@ -40,11 +42,11 @@ class PostsTable
                 ViewAction::make(),
                 EditAction::make(),
             ])
-            // ->toolbarActions([
-            //     BulkActionGroup::make([
-            //         DeleteBulkAction::make(),
-            //     ]),
-            // ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ])
             ;
     }
 }

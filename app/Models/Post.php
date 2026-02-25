@@ -32,7 +32,7 @@ class Post extends Model
 
         static::saving(function ($post){
             $slug  = Str::slug($post->title);
-            $count = post::where('slug','like',"$slug%")->count();
+            $count = static::where('slug','like',"$slug%")->count();
             $post->slug = $count ? "{$slug}-{$count}" : $slug;
         });
     }

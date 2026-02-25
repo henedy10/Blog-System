@@ -6,6 +6,8 @@ use App\Filament\Resources\Posts\PostResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Log;
+use Filament\Notifications\Notification;
 
 class EditPost extends EditRecord
 {
@@ -15,7 +17,14 @@ class EditPost extends EditRecord
     {
         return [
             ViewAction::make(),
-            // DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
+
+
+    protected function getSavedNotificationTitle(): ?string
+    {
+        return 'User updated';
+    }
+
 }
