@@ -15,6 +15,8 @@ class PostInfolist
                 Section::make('Details')
                     ->inlineLabel()
                     ->schema([
+                        TextEntry::make('user.name')
+                            ->label('Creator'),
                         TextEntry::make('title'),
                         TextEntry::make('status')
                             ->label('status')

@@ -17,14 +17,16 @@ class EditPost extends EditRecord
     {
         return [
             ViewAction::make(),
-            DeleteAction::make(),
+            // DeleteAction::make(),
         ];
     }
 
-
-    protected function getSavedNotificationTitle(): ?string
+    protected function getSavedNotification(): ?Notification
     {
-        return 'User updated';
+        return Notification::make()
+            ->success()
+            ->title('Post updated')
+            ->body('The post has been saved successfully.');
     }
 
 }

@@ -15,16 +15,10 @@ class PostsTable
     {
         return $table
             ->columns([
+                TextColumn::make('user.name')
+                    ->label('Creator'),
                 TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(),
                 TextColumn::make('status')
                     ->searchable()
                     ->badge()
@@ -34,19 +28,29 @@ class PostsTable
                         'danger'  => 'rejected'
                     ])
                     ->alignCenter(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(),
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()->button(),
+                EditAction::make()->button(),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                // BulkActionGroup::make([
+                //     DeleteBulkAction::make(),
+                // ]),
             ])
+            ->emptyStateHeading('No posts yet')
+            ->emptyStateIcon('heroicon-o-bookmark')
             ;
     }
 }
