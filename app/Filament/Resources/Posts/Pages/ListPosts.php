@@ -23,7 +23,7 @@ class ListPosts extends ListRecords
     public function getTabs(): array
     {
         return [
-            'all'      => Tab::make(),
+            'All'      => Tab::make(),
             'Accepted' => Tab::make()->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'accepted')),
             'Pending'  => Tab::make()->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'pending')),
             'Rejected' => Tab::make()->modifyQueryUsing(fn (Builder $query) => $query->where('status', 'rejected'))

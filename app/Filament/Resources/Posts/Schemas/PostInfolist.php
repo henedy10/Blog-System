@@ -13,28 +13,28 @@ class PostInfolist
         return $schema
             ->components([
                 Section::make('Details')
-                    ->inlineLabel()
                     ->schema([
                         TextEntry::make('user.name')
-                            ->label('Creator'),
-                        TextEntry::make('title'),
-                        TextEntry::make('status')
-                            ->label('status')
-                            ->badge()
-                            ->colors([
-                                'success' => 'accepted',
-                                'warning' => 'pending',
-                                'danger'  => 'rejected'
-                            ]),
-                        TextEntry::make('description')
-                            ->label('description'),
-                        TextEntry::make('updated_at')
-                            ->label('updated At'),
-                        TextEntry::make('created_at')
-                            ->label('created At'),
-                    ])
-                    ->columnSpanFull()
-            ]);
+                                ->label('Creator'),
+                                TextEntry::make('title'),
+                                TextEntry::make('status')
+                                ->label('status')
+                                ->badge()
+                                ->colors([
+                                    'success' => 'accepted',
+                                    'warning' => 'pending',
+                                    'danger'  => 'rejected'
+                                    ]),
+                                    TextEntry::make('description')
+                                    ->label('description'),
+                                    TextEntry::make('updated_at')
+                                    ->label('updated At'),
+                                    TextEntry::make('created_at')
+                                    ->label('created At'),
+                                    ])
+                                    ->columnSpanFull()
+                                    ->inlineLabel()
+                        ]);
 
     }
 }

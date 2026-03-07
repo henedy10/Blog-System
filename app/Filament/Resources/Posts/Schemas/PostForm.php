@@ -25,14 +25,14 @@ class PostForm
                     })
                     ->placeholder('Message for rejection reason'),
                 Select::make('status')
-                ->options([
-                    'accepted' => 'Accepted',
-                    'pending'  => 'Pending',
-                    'rejected' => 'Rejected',
-                ])
-                ->required()
-                ->live()
-                ->default('pending'),
+                    ->options([
+                        'accepted' => 'Accepted',
+                        'pending'  => 'Pending',
+                        'rejected' => 'Rejected',
+                    ])
+                    ->required()
+                    ->live()
+                    ->default('pending'),
             ]);
     }
 }
