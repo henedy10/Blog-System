@@ -24,7 +24,7 @@ class CommentRequest extends FormRequest
         return [
             'comment'   => 'required|string|max:255',
             'post_id'   => 'required|integer|exists:posts,id',
-            'parent_id' => 'required|integer|exists:comments,id'
+            'parent_id' => 'sometimes|integer|exists:comments,id'
         ];
     }
 }

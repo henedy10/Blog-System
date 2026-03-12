@@ -10,8 +10,8 @@
                 <p class="mt-2 text-slate-600">Read the latest accepted posts.</p>
             </div>
 
-            <form method="GET" action="{{ route('blog.index') }}" class="w-full sm:w-96">
-                <label class="sr-only" for="q">Search</label>
+            {{-- <form method="P" action="{{ route('blog.index') }}" class="w-full sm:w-96">
+                @csrf
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -23,7 +23,7 @@
                         class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition duration-150 ease-in-out shadow-sm"
                         placeholder="Search posts by title...">
                 </div>
-            </form>
+            </form> --}}
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -34,9 +34,6 @@
                             <span class="flex items-center text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
                                 {{$post->created_at->format('M d, Y')}}
                             </span>
-                            {{-- <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
-                                accepted
-                            </span> --}}
                         </div>
 
                         <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors">
@@ -51,8 +48,8 @@
                     </div>
 
                     <div class="px-6 py-4 bg-gray-50/50 border-t border-gray-100 flex items-center justify-between">
-                        <div class="text-sm text-red-500">
-                            By <span class="font-semibold text-green-700">{{ $post->user?->name ?? 'Unknown' }}</span>
+                        <div class="text-sm text-gray-500">
+                            By <span class="font-semibold text-gray-700">{{ $post->user?->name ?? 'Unknown' }}</span>
                         </div>
                         <a href="{{ route('blog.show', $post->slug) }}"
                             class="text-sm font-semibold text-indigo-600 hover:text-indigo-500 transition-colors inline-flex items-center group/link">

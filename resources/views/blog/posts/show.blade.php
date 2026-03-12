@@ -55,6 +55,37 @@
                 </span>
             </div>
 
+            <form method="POST" action="{{route('comments.store')}}" class="flex items-start gap-3 mt-4 mb-4">
+                @csrf
+
+                <!-- User Avatar -->
+                <img
+                    src="https://ui-avatars.com/api/?name={{Auth::user()->name[0]}}"
+                    class="w-9 h-9 rounded-full"
+                >
+
+                <div class="flex-1">
+                    <input
+                        type="text"
+                        id="commentInput"
+                        name="comment"
+                        placeholder="Write a comment..."
+                        class="w-full bg-gray-100 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 transition"
+                    >
+
+                    <input type="hidden" name="post_id" value="{{$post->id}}">
+
+                    <div id="commentButton" class="hidden justify-end mt-2 mb-2 ">
+                        <button
+                            type="submit"
+                            class="px-4 py-1.5 text-sm font-medium text-white bg-blue-500 rounded-full hover:bg-blue-600 transition"
+                        >
+                            Comment
+                        </button>
+                    </div>
+                </div>
+            </form>
+
             <div class="space-y-6">
                 @forelse ($post->comments as $comment)
                     @include('posts.comments.comment',['comment' => $comment , 'post_id' => $post->id])
@@ -73,5 +104,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const input = document.getElementById('commentInput');
+        const button = document.getElementById('commentButton');
+
+        input.addEventListener('input', function () {
+            if (this.value.trim().length > 0) {
+                button.classList.remove('hidden');
+                button.classList.add('flex');
+            } else {
+                button.classList.add('hidden');
+            }
+        });
+    </script>
 @endsection
 
