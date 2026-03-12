@@ -10,19 +10,21 @@ class LikeButton extends Component
 {
     public $isLiked;
     public $comment;
+    public $status;
     public $countLikes;
 
-    public function mount($comment){
+    public function mount($comment,$status){
+        $this->status = $status;
         $this->comment = $comment;
         $this->countLikes = $this->comment->likes()->count();
 
-        $this->isLiked = Like::where('likeable_type','App\Models\Comment')
+        $this->isLiked = Like::where('likeable_type',"App\Models\\".$this->status)
                             ->where('likeable_id',$this->comment->id)
                             ->where('user_id',Auth::id())
                             ->exists();
     }
     public function toggleLike(){
-        $liked = Like::where('likeable_type','App\Models\Comment')
+        $liked = Like::where('likeable_type',"App\Models\\".$this->status)
                             ->where('likeable_id',$this->comment->id)
                             ->where('user_id',Auth::id())
                             ->first();
@@ -36,7 +38,7 @@ class LikeButton extends Component
             Like::create([
                 'user_id'       => Auth::id(),
                 'likeable_id'   => $this->comment->id,
-                'likeable_type' => 'App\Models\Comment'
+                'likeable_type' => "App\Models\\".$this->status
             ]);
         }
 

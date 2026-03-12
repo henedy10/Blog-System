@@ -1,21 +1,31 @@
 <?php
 
 use App\Http\Controllers\Comments\CommentController;
+use App\Http\Controllers\Blog\PostReadController;
 use App\Http\Controllers\Creator\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 
 Route::get('/dashboard', function () {
     if(Auth::user()->role == 'Creator'){
         return redirect()->route('posts.index');
     }
 
+    if (Auth::user()->role == 'User') {
+        return redirect()->route('blog.index');
+    }
+
     return redirect()->route('filament.admin.pages.dashboard');
 
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+Route::get('/blog', [PostReadController::class, 'index'])->name('blog.index');
 Route::middleware('auth')->group(function () {
+    Route::get('/blog/{post:slug}', [PostReadController::class, 'show'])->name('blog.show');
+
     // Profile Section
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

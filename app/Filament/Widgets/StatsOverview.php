@@ -38,19 +38,19 @@ class StatsOverview extends StatsOverviewWidget
 
         return [
             Stat::make('Posts Count', Post::query()->count())
-                ->description($PostsLastMonth-$PostsThisMonth == 0 ? 'No Change' : abs($PostsLastMonth-$PostsThisMonth) . ($PostsThisMonth >= $PostsLastMonth ? ' increase' : ' decrease'))
+                ->description($PostsLastMonth-$PostsThisMonth == 0 ? 'No change from last month' : abs($PostsLastMonth-$PostsThisMonth) . ($PostsThisMonth >= $PostsLastMonth ? ' increase' : ' decrease'))
                 ->descriptionIcon($PostsLastMonth-$PostsThisMonth == 0 ? 'heroicon-m-minus' : ($PostsThisMonth > $PostsLastMonth ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down'))
                 ->chart($PostsChart)
                 ->color($PostsLastMonth-$PostsThisMonth == 0 ? 'gray' : ($PostsThisMonth > $PostsLastMonth ? 'success' : 'danger')),
 
             Stat::make('Creators Count', User::where('role','creator')->count())
-                    ->description($CreatorsLastMonth-$CreatorsThisMonth == 0 ? 'No Change' : abs($CreatorsLastMonth-$CreatorsThisMonth) . ($CreatorsThisMonth >= $CreatorsLastMonth ? ' increase' : ' decrease'))
+                    ->description($CreatorsLastMonth-$CreatorsThisMonth == 0 ? 'No change from last month' : abs($CreatorsLastMonth-$CreatorsThisMonth) . ($CreatorsThisMonth >= $CreatorsLastMonth ? ' increase' : ' decrease'))
                     ->descriptionIcon($CreatorsLastMonth-$CreatorsThisMonth == 0 ? 'heroicon-m-minus' : ($CreatorsThisMonth > $CreatorsLastMonth ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down'))
                     ->chart($CreatorsChart)
                     ->color($CreatorsLastMonth-$CreatorsThisMonth == 0 ? 'gray' : ($CreatorsThisMonth > $CreatorsLastMonth ? 'success' : 'danger')),
 
             Stat::make('Users Count', User::where('role','user')->count())
-                    ->description($UsersLastMonth-$UsersThisMonth == 0 ? 'No Change' : abs($UsersLastMonth-$UsersThisMonth) . ($UsersThisMonth >= $UsersLastMonth ? ' increase' : ' decrease'))
+                    ->description($UsersLastMonth-$UsersThisMonth == 0 ? 'No change from last month' : abs($UsersLastMonth-$UsersThisMonth) . ($UsersThisMonth >= $UsersLastMonth ? ' increase' : ' decrease'))
                     ->descriptionIcon($UsersLastMonth-$UsersThisMonth == 0 ? 'heroicon-m-minus' : ($UsersThisMonth > $UsersLastMonth ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down'))
                     ->chart($UsersChart)
                     ->color($UsersLastMonth-$UsersThisMonth == 0 ? 'gray' : ($UsersThisMonth > $UsersLastMonth ? 'success' : 'danger')),

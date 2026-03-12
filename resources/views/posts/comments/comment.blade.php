@@ -31,7 +31,7 @@
 
             <!-- Actions -->
             <div class="flex items-center gap-4 text-xs text-gray-500 mt-3">
-                @livewire('like-button', ['comment' => $comment])
+                @livewire('like-button', ['comment' => $comment , 'status' => 'Comment'])
 
                 <button
                     class="hover:text-indigo-600 transition"
@@ -41,7 +41,7 @@
                 </button>
 
                 @if ($comment->replies_count > 0)
-                    @livewire('load-replies',['comment' => $comment])
+                    @livewire('load-replies',['comment' => $comment , 'status' => 'Comment'])
                 @endif
             </div>
 
