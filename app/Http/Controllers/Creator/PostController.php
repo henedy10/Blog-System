@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Creator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Models\User;
+use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -32,6 +35,13 @@ class PostController extends Controller
             'description' => $request->description,
             'user_id'     => $request->post_creator
         ]);
+
+        $recipient = User::where('role','admin')->first();
+
+        Notification::make()
+            ->title("New Post Created by ".Auth::user()->name)
+            ->success()
+            ->sendToDatabase($recipient);
 
         return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }

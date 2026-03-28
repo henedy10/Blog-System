@@ -40,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->profile(MyProfile::class,isSimple: false)
             ->brandName('Blog System')
+            ->databaseNotifications()
             ->colors(['primary' => Color::Red])
             ->globalSearch(false)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
