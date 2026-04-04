@@ -3,10 +3,11 @@ namespace App\Http\Controllers\Creator;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Jobs\NotificationForCreatePost;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
-use Filament\Notifications\Notification;
-use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -29,19 +30,16 @@ class PostController extends Controller
     }
 
     public function store(PostRequest $request) {
-
         Post::create([
             'title'       => $request->title,
             'description' => $request->description,
             'user_id'     => $request->post_creator
         ]);
 
+
         $recipient = User::where('role','admin')->first();
 
-        Notification::make()
-            ->title("New Post Created by ".Auth::user()->name)
-            ->success()
-            ->sendToDatabase($recipient);
+        NotificationForCreatePost::dispatch($recipient,Auth::user()->name);
 
         return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }
