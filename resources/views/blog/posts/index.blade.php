@@ -32,7 +32,7 @@
                     <div class="p-6 flex-1 flex flex-col">
                         <div class="flex items-center justify-between mb-4">
                             <span class="flex items-center text-xs font-medium text-gray-500 bg-gray-100 px-2.5 py-1 rounded-full">
-                                {{$post->created_at->format('M d, Y')}}
+                                {{$post->created_at?->format('M d, Y')}}
                             </span>
                         </div>
 

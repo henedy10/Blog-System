@@ -7,7 +7,7 @@ use App\Jobs\NotificationForCreatePost;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -45,10 +45,14 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
+        Gate::authorize('view',$post);
         return view('posts.edit',compact('post'));
     }
 
     public function update(Post $Post,PostRequest $request){
+
+        Gate::authorize('update',$Post);
+
         $Post->update([
             'title'        => $request->title,
             'description'  => $request->description,
@@ -59,6 +63,7 @@ class PostController extends Controller
     }
 
     public function destroy(Post $post){
+        Gate::authorize('delete',$post);
         $post->delete();
         return redirect()->route('posts.index')->with('success','Post is deleted successfully');
     }

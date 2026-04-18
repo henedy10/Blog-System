@@ -4,6 +4,7 @@ use App\Http\Controllers\Comments\CommentController;
 use App\Http\Controllers\Blog\PostReadController;
 use App\Http\Controllers\Creator\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\CreatePost;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,8 +34,10 @@ Route::middleware('auth')->group(function () {
 
     // Posts Section
     Route::get('/posts',[PostController::class,'index'])->name('posts.index');
-    Route::post('/posts',[PostController::class,'store'])->name('posts.store');
-    Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
+    Route::middleware(CreatePost::class.':Creator')->group(function(){
+        Route::post('/posts',[PostController::class,'store'])->name('posts.store');
+        Route::get('/posts/create',[PostController::class,'create'])->name('posts.create');
+    });
     Route::get('/posts/{post:slug}',[PostController::class,'show'])->name('posts.show');
     Route::get('/posts/{post:slug}/edit',[PostController::class,'edit'])->name('posts.edit');
     Route::put('/posts/{post}',[PostController::class,'update'])->name('posts.update');
