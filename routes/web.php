@@ -24,7 +24,7 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/blog', [PostReadController::class, 'index'])->name('blog.index');
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
     Route::get('/blog/{post:slug}', [PostReadController::class, 'show'])->name('blog.show');
 
     // Profile Section
@@ -45,7 +45,7 @@ Route::middleware('auth')->group(function () {
 
     // Comments Section
     Route::post('/comments',[CommentController::class,'store'])->name('comments.store');
-});
+// });
 
 
 require __DIR__.'/auth.php';

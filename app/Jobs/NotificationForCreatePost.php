@@ -34,13 +34,14 @@ class NotificationForCreatePost implements ShouldQueue, ShouldBeEncrypted
     /**
      * Execute the job.
      */
-    public function handle(): void
-    {
-        Notification::make()
-            ->title("New Post Created by ".$this->userName)
-            ->success()
-            ->sendToDatabase($this->recipient);
-    }
+    // public function handle(): void
+    // {
+    //     Notification::make()
+    //         ->title("New Post Created by ".$this->userName)
+    //         ->success()
+    //         ->sendToDatabase($this->recipient)
+    //         ->broadcast($this->recipient);
+    // }
 
     /**
      * Handle a job failure.
