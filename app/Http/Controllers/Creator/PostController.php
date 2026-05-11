@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Http;
-use App\Events\SendNotification;
-use Filament\Notifications\Notification;
 
 class PostController extends Controller
 {
@@ -41,12 +38,8 @@ class PostController extends Controller
 
         $admins = User::where('role','admin')->get();
 
-        Notification::make()
-            ->title(Auth::user()->name.' created a new post')
-            ->body($request->title)
-            ->success()
-            ->sendToDatabase($admins)
-            ->broadcast($admins);
+        NotificationForCreatePost::dispatch($admins,Auth::user()->name,$request->title);
+
         return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }
 
