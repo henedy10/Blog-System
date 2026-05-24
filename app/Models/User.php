@@ -24,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'google_id',
+        'role',
     ];
 
     public function posts(){

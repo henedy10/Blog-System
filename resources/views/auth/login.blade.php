@@ -31,6 +31,11 @@
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
+        
+        <div class="my-3 text-center bg-blue-500 text-white p-2 mb-3 rounded-lg cursor-pointer hover:bg-blue-600">
+            <a href="{{route('login.google')}}" class="text-white">Login with Google</a>
+        </div>
+
         <div class="g-recaptcha" data-sitekey={{env('RECAPTCHA_SITE_KEY')}}></div>
         <x-input-error :messages="$errors->get('g-recaptcha-response')" class="mt-2" />
 

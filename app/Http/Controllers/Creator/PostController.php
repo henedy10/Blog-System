@@ -3,10 +3,7 @@ namespace App\Http\Controllers\Creator;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
-use App\Jobs\NotificationForCreatePost;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
-use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
@@ -35,10 +32,6 @@ class PostController extends Controller
             'description' => $request->description,
             'user_id'     => $request->post_creator
         ]);
-
-        $admins = User::where('role','admin')->get();
-
-        NotificationForCreatePost::dispatch($admins,Auth::user()->name,$request->title);
 
         return redirect()->route('posts.index')->with(['successCreatePost' => 'Post created successfully']);
     }

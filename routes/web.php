@@ -5,9 +5,36 @@ use App\Http\Controllers\Blog\PostReadController;
 use App\Http\Controllers\Creator\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\CreatePost;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Socialite;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
+
+
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('google')->redirect();
+})->name('login.google');
+
+Route::get('/auth/callback', function () {
+
+    $googleUser = Socialite::driver('google')->user();
+
+    $user = User::updateOrCreate([
+        'email' => $googleUser->getEmail(),
+    ], [
+        'name' => $googleUser->getName(),
+        'password' => bcrypt(Str::random(8)),
+        'google_id' => $googleUser->getId(),
+    ]);
+
+    Auth::login($user);
+    log::info($googleUser->getEmail() . ' '. $googleUser->getId());
+
+    return redirect('/dashboard');
+});
 
 Route::get('/dashboard', function () {
     if(Auth::user()->role == 'Creator'){

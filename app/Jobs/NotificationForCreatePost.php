@@ -16,7 +16,7 @@ class NotificationForCreatePost implements ShouldQueue, ShouldBeEncrypted
     /**
      * Create a new job instance.
      */
-    public function __construct(public $recipient,public $userName,public $title)
+    public function __construct(public object $recipient,public string $userName,public string $title)
     {
         //
     }

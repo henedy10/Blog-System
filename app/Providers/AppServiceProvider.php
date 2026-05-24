@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\Post;
 use App\Policies\PostPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Post;
 
 class AppServiceProvider extends ServiceProvider
 {
