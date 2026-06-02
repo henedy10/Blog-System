@@ -37,7 +37,7 @@ class PostController extends Controller
     }
 
     public function edit(Post $post){
-        Gate::authorize('view',$post);
+        Gate::authorize('edit',$post);
         return view('posts.edit',compact('post'));
     }
 

@@ -8,10 +8,13 @@ use Filament\Actions\ViewAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Log;
 use Filament\Notifications\Notification;
+use App\Models\User;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 
 class EditPost extends EditRecord
 {
     protected static string $resource = PostResource::class;
+
 
     protected function getHeaderActions(): array
     {
@@ -28,5 +31,4 @@ class EditPost extends EditRecord
             ->title('Post updated')
             ->body('The post has been saved successfully.');
     }
-
 }

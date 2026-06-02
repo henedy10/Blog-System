@@ -18,6 +18,7 @@ use Filament\Tables\Table;
 
 class PostResource extends Resource
 {
+    protected static bool $shouldSkipAuthorization = true;
     protected static ?string $model = Post::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ArrowUpOnSquareStack;
@@ -50,7 +51,6 @@ class PostResource extends Resource
     {
         return [
             'index'  => ListPosts::route('/'),
-            // 'create' => CreatePost::route('/create'),
             'view'   => ViewPost::route('/{record}'),
             'edit'   => EditPost::route('/{record}/edit'),
         ];

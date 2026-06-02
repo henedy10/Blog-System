@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Socialite;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\NotificationController;
 
 
 
@@ -72,7 +73,13 @@ Route::get('/blog', [PostReadController::class, 'index'])->name('blog.index');
 
     // Comments Section
     Route::post('/comments',[CommentController::class,'store'])->name('comments.store');
-// });
 
+    Route::get('get-notifications', [NotificationController::class, 'getNotifications'])->name('notifications.get');
+    Route::put('mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.markAllAsRead');
+    Route::put('mark-as-read/{notification}', [NotificationController::class, 'markAsRead'])->name('notifications.markAsRead');
+    Route::delete('delete-notification/{notification}', [NotificationController::class, 'deleteNotification'])->name('notifications.delete');
+    Route::delete('clear-all', [NotificationController::class, 'clearAll'])->name('notifications.clearAll');
+
+// });
 
 require __DIR__.'/auth.php';

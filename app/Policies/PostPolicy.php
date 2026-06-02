@@ -13,7 +13,7 @@ class PostPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,7 +21,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post): bool
     {
-        return $user->id === $post->user_id;
+        return true;
     }
 
     /**
@@ -29,9 +29,12 @@ class PostPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->role === 'creator';
     }
 
+    public function edit(User $user,Post $post): bool{
+        return $user->id === $post->user_id;
+    }
     /**
      * Determine whether the user can update the model.
      */
