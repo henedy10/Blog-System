@@ -45,10 +45,10 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center">
                         <a href="{{ route('posts.index') }}" class="group flex items-center gap-2">
-                             <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-indigo-500/30 transition-shadow">
+                             <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-indigo-500 font-bold text-lg shadow-lg group-hover:shadow-indigo-500/30 transition-shadow">
                                 B
                              </div>
-                            <span class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-600 tracking-tight">
+                            <span class="w-8 h-8 flex items-center justify-center text-indigo-500 font-bold text-lg ">
                                 blog
                             </span>
                         </a>
@@ -66,14 +66,14 @@
                         <button class="px-4 py-2 rounded-md text-sm font-medium text-slate-700 hover:text-indigo-600 hover:bg-slate-50 transition-all relative group">
                             <svg class="mr-3 h-5 w-5 text-gray-400 group-hover:text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>    
+                            </svg>
                             <span class="absolute top-1 right-0 text-xs bg-red-500 text-white rounded-full w-4 h-4 flex items-center justify-center" id="notifications-count">
                             </span>
                         </button>
                     </div>
                     <div id="notifications-display"
                         class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-xl overflow-y-auto max-h-80 z-50">
-                    </div>  
+                    </div>
                     <div class="flex items-center">
                          <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
@@ -149,12 +149,36 @@
                 document.getElementById('notifications-count').textContent = data.unReadNotificationsCount;
                 let container = document.getElementById('notifications-display');
                 if(data.unReadNotificationsCount == 0){
-                    container.innerHTML = '<div class="p-4 border-b border-gray-100 hover:bg-gray-50"><p class="text-sm text-gray-700">No notifications</p></div>';
+                    container.innerHTML = ` <div class="p-6 text-center border-b border-gray-100 bg-gray-50">
+                                                <div class="flex flex-col items-center justify-center gap-3">
+
+                                                    <!-- Icon -->
+                                                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-gray-200">
+                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-6 h-6 text-gray-500"
+                                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11
+                                                                    a6.002 6.002 0 00-4-5.659V5
+                                                                    a2 2 0 10-4 0v.341C7.67 6.165
+                                                                    6 8.388 6 11v3.159c0 .538-.214
+                                                                    1.055-.595 1.436L4 17h5m6 0v1
+                                                                    a3 3 0 11-6 0v-1m6 0H9" />
+                                                        </svg>
+                                                    </div>
+
+                                                    <!-- Text -->
+                                                    <p class="text-sm font-medium text-gray-700">
+                                                        No notifications yet
+                                                    </p>
+
+                                                </div>
+                                            </div>`;
                 } else {
                     html += `
                         <div class="flex items-center justify-between p-2 border-b border-gray-100">
-                            <a href="" class="inline-block px-2 py-1 text-blue-500 rounded-md text-xs">Mark All as Read</a>
-                            <a href="" class="inline-block px-2 py-1 text-red-500 rounded-md text-xs">Delete All</a>
+                            <button class="read-all px-2 py-1 text-blue-500 rounded-md text-xs">Mark All as Read</button>
+                            <button class="delete-all px-2 py-1 text-red-500 rounded-md text-xs">Delete All</button>
                         </div>
                     `;
                     data.notifications.forEach(notification => {
@@ -163,8 +187,8 @@
                             <div class="p-4 border-b border-gray-100 hover:bg-gray-50">
                                 <p class="text-sm text-gray-700">${notification.data.body}</p>
                                 <p class="text-xs text-gray-400 mt-1">${new Date(notification.created_at).toLocaleString()}</p>
-                                <a href="" class="inline-block px-2 py-1 bg-indigo-500 text-white rounded-md mt-2 text-xs">Mark as Read</a>
-                                <a href="" class="inline-block px-2 py-1 bg-red-500 text-white rounded-md mt-2 text-xs">Delete</a>
+                                <button data-id="${notification.id}"  class="mark-read px-2 py-1 bg-indigo-500 text-white rounded-md mt-2 text-xs">Mark as Read</button>
+                                <button data-id="${notification.id}" class="delete-notification px-2 py-1 bg-red-500 text-white rounded-md mt-2 text-xs">Delete</button>
                             </div>
                         `;
                     });
@@ -175,7 +199,7 @@
                 console.log(error);
             });
         }
-        
+
 
         function confirmDelete() {
             return confirm("Are you sure you want to delete this post? This action cannot be undone.");
@@ -185,6 +209,93 @@
             document.getElementById('notifications-display').classList.toggle('hidden');
         });
 
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('mark-read')) {
+                markAsRead(e.target.dataset.id);
+            }else if (e.target.classList.contains('delete-notification')){
+                deleteNotification(e.target.dataset.id);
+            }else if(e.target.classList.contains('delete-all')){
+                deleteAll();
+            }else if(e.target.classList.contains('read-all')){
+                readAll();
+            }
+        });
+
+        function markAsRead(id) {
+            fetch('{{ route('notifications.markAsRead', ':id') }}'.replace(':id', id), {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("Marked as read");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
+        function deleteNotification(id) {
+            fetch('{{ route('notifications.delete', ':id') }}'.replace(':id', id), {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("notification is deleted");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
+        function deleteAll() {
+            fetch('{{ route('notifications.clearAll') }}', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("notifications are deleted");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
+        function readAll() {
+            fetch('{{ route('notifications.markAllAsRead') }}', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    console.log("notifications are read");
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
     </script>
     <script type="module">
         Echo.private('notify.{{ auth()->id() }}')

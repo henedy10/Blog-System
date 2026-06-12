@@ -26,8 +26,8 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function markAsRead($notification)
-    {       
+    public function markAsRead(string $notification)
+    {
         DB::table('notifications')
         ->where('id', $notification)
         ->where('notifiable_id', Auth::user()->id)
@@ -38,8 +38,8 @@ class NotificationController extends Controller
         ]);
     }
 
-    public function deleteNotification($notification)
-    {       
+    public function deleteNotification(string $notification)
+    {
         DB::table('notifications')
         ->where('id', $notification)
         ->where('notifiable_id', Auth::user()->id)
@@ -50,10 +50,18 @@ class NotificationController extends Controller
     }
 
     public function clearAll()
-    {       
+    {
         DB::table('notifications')
         ->where('notifiable_id', Auth::user()->id)
         ->delete();
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function markAllAsRead()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
         return response()->json([
             'success' => true
         ]);
