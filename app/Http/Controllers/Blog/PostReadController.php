@@ -5,20 +5,19 @@ namespace App\Http\Controllers\Blog;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Cache;
 class PostReadController extends Controller
 {
     public function index(Request $request)
     {
-        // $q = trim((string) $request->query('q', ''));
-
-        $posts = Post::query()
-            ->where('status', 'accepted')
-            // ->when($q !== '', fn ($query) => $query->where('title', 'like', '%' . $q . '%'))
-            ->with('user')
-            ->latest()
-            ->paginate(9)
-            ->withQueryString();
+        $posts = Cache::remember('posts', 300, function () {
+                return Post::query()
+                            ->where('status', 'accepted')
+                            ->with('user')
+                            ->latest()
+                            ->paginate(6)
+                            ->withQueryString();
+            });
 
         return view('blog.posts.index', @compact('posts', 'q'));
     }

@@ -9,6 +9,7 @@ use App\Events\notificationForUpdatePostStatus;
 use Illuminate\Support\Facades\Auth;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class PostObserver
 {
@@ -27,7 +28,6 @@ class PostObserver
      */
     public function updated(Post $post): void
     {
-
         $recipient = User::where('id',$post->user_id)->first();
         if($recipient->id != Auth::user()->id) {
             try {
@@ -45,6 +45,8 @@ class PostObserver
                 Log::error('Failed to send notification: ' . $e->getMessage());
             }
         }
+
+        Cache::forget('posts');
     }
     /**
      * Handle the Post "deleted" event.

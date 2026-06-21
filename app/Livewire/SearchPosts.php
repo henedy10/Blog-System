@@ -18,7 +18,7 @@ class SearchPosts extends Component
     public function render(){
         $posts = Post::where('user_id',Auth::id())
                     ->where('title','LIKE','%' . $this->query . '%')
-                    ->simplePaginate(5);
+                    ->simplePaginate(6);
 
         return view('livewire.search-posts',['posts' => $posts ]);
     }
